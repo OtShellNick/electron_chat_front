@@ -5,10 +5,10 @@
   height: 100vh;
 
   &__container {
-    background-color: var(--white);
+    background-color: var(--white-color);
     border-radius: 0.5rem;
     padding: 1.5rem;
-    color: var(--black);
+    color: var(--black-color-light);
   }
 
   &__header {
@@ -24,11 +24,11 @@
       transition: all .3s ease;
 
       &:hover {
-        background-color: var(--white-50);
+        background-color: var(--white-color-light);
       }
 
       &-active {
-        border-bottom: 1px solid var(--white-100);
+        border-bottom: 1px solid var(--white-color-dark);
         transition: background-color 0.3s ease, color 0.3s ease;
       }
     }
@@ -53,28 +53,14 @@
 
     & input {
       padding: 0.5rem;
-      border: 1px solid var(--white-100);
+      border: 1px solid var(--white-color-dark);
       border-radius: 0.25rem;
       margin-bottom: 0.25rem;
     }
   }
 
   &__error {
-    color: var(--red);
+    color: var(--error-text-color);
     font-size: 0.75rem;
-  }
-
-  & button[type="submit"] {
-    padding: 0.5rem 1rem;
-    background-color: var(--black);
-    color: var(--white);
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: all .3s ease;
-
-    &:hover {
-      background-color: #555555;
-    }
   }
 }

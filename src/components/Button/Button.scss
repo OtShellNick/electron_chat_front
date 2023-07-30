@@ -1,0 +1,66 @@
+/**
+ * Миксин для стилей кнопки.
+ *
+ * @param {string} $type - Тип кнопки.
+ * @param {string} $color - Цвет кнопки.
+ */
+ @mixin button-style($type, $color) {
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &--#{$type} {
+      background-color: var(--#{$color}-color);
+      color: var(--#{$color}-text-color);
+
+      &:hover {
+        background-color: var(--#{$color}-color-hover);
+      }
+    }
+  }
+}
+
+/**
+ * Миксин для размеров кнопки.
+ *
+ * @param {string} $size - Размер кнопки.
+ */
+@mixin button-size($size) {
+  .button {
+    @if $size == sm {
+      &--sm {
+        font-size: 0.75rem;
+      }
+    } @else if $size == md {
+      &--md {
+        font-size: 1rem;
+      }
+    } @else if $size == lg {
+      &--lg {
+        font-size: 1.5rem;
+      }
+    } @else {
+      /* Обработка ошибки, если передано некорректное значение */
+      @error "Некорректный размер кнопки: #{$size}. Используйте 'sm', 'md' или 'lg'.";
+    }
+  }
+}
+
+/* Применение стилей для кнопок */
+@include button-style(primary, primary);
+@include button-style(secondary, secondary);
+@include button-style(success, success);
+@include button-style(danger, danger);
+@include button-style(warning, warning);
+
+/* Применение размеров для кнопок */
+@include button-size(sm);
+@include button-size(md);
+@include button-size(lg);

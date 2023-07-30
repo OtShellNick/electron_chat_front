@@ -1,6 +1,8 @@
 import { memo } from 'react';
 import { useFormik, FormikHelpers } from 'formik';
 
+import { Button } from 'components/Button';
+
 import { validationSchemaRegister } from 'helpers/validation';
 
 /**
@@ -105,7 +107,7 @@ export const Register: React.FC = memo(() => {
           <div className="form__error">{formik.errors.confirmPassword}</div>
         )}
       </div>
-      <button type="submit">Отправить</button>
+      <Button type="submit">Отправить</Button>
     </form>
   );
 });
