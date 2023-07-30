@@ -2,7 +2,7 @@ import { createRoot } from 'react-dom/client';
 import { MemoryRouter } from 'react-router-dom';
 import { App } from 'renderer/App';
 
-import { ElectronStorage } from 'renderer/helpers/storage';
+import { ElectronStorage } from 'helpers/storage';
 
 import 'normalize.css';
 import 'renderer/styles/main.scss';

@@ -4,8 +4,6 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { Hello } from 'renderer/Hello';
 import { Login } from 'renderer/Login';
 
-import { getUserData } from 'renderer/helpers/storage';
-
 import './App.css';
 
 export function App() {
