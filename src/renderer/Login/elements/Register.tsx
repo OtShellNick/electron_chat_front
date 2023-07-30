@@ -7,7 +7,7 @@ import { validationSchemaRegister } from 'helpers/validation';
  * Интерфейс для значений формы.
  */
 interface FormValues {
-  name: string;
+  nick: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -20,7 +20,7 @@ interface FormValues {
 export const Register: React.FC = memo(() => {
   const formik = useFormik<FormValues>({
     initialValues: {
-      name: '',
+      nick: '',
       email: '',
       password: '',
       confirmPassword: ''
@@ -46,18 +46,18 @@ export const Register: React.FC = memo(() => {
   return (
     <form className="form" onSubmit={formik.handleSubmit}>
       <div className="form__field">
-        <label htmlFor="name">Имя</label>
+        <label htmlFor="nick">Ник</label>
         <input
-          id="name"
-          name="name"
+          id="nick"
+          name="nick"
           type="text"
-          placeholder="Аноним"
-          value={formik.values.name}
+          placeholder="Ник"
+          value={formik.values.nick}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
-        {formik.touched.name && formik.errors.name && (
-          <div className="form__error">{formik.errors.name}</div>
+        {formik.touched.nick && formik.errors.nick && (
+          <div className="form__error">{formik.errors.nick}</div>
         )}
       </div>
       <div className="form__field">
