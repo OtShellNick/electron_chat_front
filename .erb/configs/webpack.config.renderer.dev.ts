@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import FontPreloadPlugin from 'webpack-font-preload-plugin';
 import chalk from 'chalk';
 import { merge } from 'webpack-merge';
 import { execSync, spawn } from 'child_process';
@@ -162,6 +163,11 @@ const configuration: webpack.Configuration = {
       isDevelopment: process.env.NODE_ENV !== 'production',
       nodeModules: webpackPaths.appNodeModulesPath,
     }),
+
+    new FontPreloadPlugin({
+      index: path.join('index.html'),
+      loadType: 'preload',
+  }),
   ],
 
   node: {

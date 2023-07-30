@@ -5,6 +5,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import FontPreloadPlugin from 'webpack-font-preload-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
@@ -131,6 +132,11 @@ const configuration: webpack.Configuration = {
       isBrowser: false,
       isDevelopment: false,
     }),
+
+    new FontPreloadPlugin({
+      index: "index.html",
+      loadType: 'preload',
+  }),
 
     new webpack.DefinePlugin({
       'process.type': '"renderer"',

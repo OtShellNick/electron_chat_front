@@ -1,13 +1,27 @@
 import { createRoot } from 'react-dom/client';
-import App from './App';
+import { MemoryRouter } from 'react-router-dom';
+import { App } from 'renderer/App';
+
+import { ElectronStorage } from 'renderer/helpers/storage';
+
+import 'normalize.css';
+import 'renderer/styles/main.scss';
 
 const container = document.getElementById('root') as HTMLElement;
 const root = createRoot(container);
-root.render(<App />);
+root.render(
+  <MemoryRouter>
+    <App />
+  </MemoryRouter>
+);
 
-// calling IPC exposed from preload script
-window.electron.ipcRenderer.once('ipc-example', (arg) => {
+// Вызов IPC из preload-скрипта
+ElectronStorage().once('ipc-example', (arg) => {
   // eslint-disable-next-line no-console
   console.log(arg);
 });
-window.electron.ipcRenderer.sendMessage('ipc-example', ['ping']);
+ElectronStorage().sendMessage('ipc-example', ['ping']);
+// ElectronStorage().sendMessage('save:user-data', {
+//   key: 'userData',
+//   value: { id: 0 }
+// });
