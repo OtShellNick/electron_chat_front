@@ -5,6 +5,8 @@ import { Button } from 'components/Button';
 
 import { validationSchemaRegister } from 'helpers/validation';
 
+import { register } from 'actions/auth.actions';
+
 /**
  * Интерфейс для значений формы.
  */
@@ -36,13 +38,19 @@ export const Register: React.FC = memo(() => {
    * @param values - Значения формы.
    * @param formikHelpers - Вспомогательные функции Formik.
    */
-  function handleSubmit(
+  async function handleSubmit(
     values: FormValues,
     formikHelpers: FormikHelpers<FormValues>
   ) {
-    formikHelpers.setSubmitting(true);
-    console.log(values);
-    formikHelpers.setSubmitting(false);
+    try {
+      formikHelpers.setSubmitting(true);
+      const registerData = await register(values);
+      console.log(registerData);
+    } catch (err) {
+      console.log('register error', err);
+    } finally {
+      formikHelpers.setSubmitting(false);
+    }
   }
 
   return (

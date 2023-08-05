@@ -5,6 +5,8 @@ import { Button } from 'components/Button';
 
 import { validationSchemaLogin } from 'helpers/validation';
 
+import { login } from 'actions/auth.actions';
+
 /**
  * Интерфейс для значений формы.
  */
@@ -32,12 +34,17 @@ export const Login: React.FC = memo(() => {
    * @param values - Значения формы.
    * @param formikHelpers - Вспомогательные функции Formik.
    */
-  function handleSubmit(
+  async function handleSubmit(
     values: FormValues,
     formikHelpers: FormikHelpers<FormValues>
   ) {
     formikHelpers.setSubmitting(true);
-    console.log(values);
+    try {
+      const data = await login(values);
+      console.log(data);
+    } catch (err) {
+      console.log('login error', err);
+    }
     formikHelpers.setSubmitting(false);
   }
 

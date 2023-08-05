@@ -13,7 +13,7 @@ class ApiClient {
    */
   constructor(baseURL: string) {
     this.client = axios.create({
-      baseURL,
+      baseURL
     });
   }
 
@@ -91,8 +91,10 @@ class ApiClient {
 }
 
 // Пример использования
-const apiClient = new ApiClient('https://api.example.com');
-apiClient.setAuthToken('your_auth_token');
+const apiClient = new ApiClient('http://185.20.225.15:3000');
+// apiClient.setAuthToken('your_auth_token');
+
+export default apiClient;
 
 interface User {
   id: number;
@@ -108,5 +110,3 @@ async function getUsers() {
     console.error(error);
   }
 }
-
-getUsers();
