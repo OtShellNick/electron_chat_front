@@ -4,6 +4,7 @@ import { useFormik, FormikHelpers } from 'formik';
 import { Button } from 'components/Button';
 
 import { validationSchemaLogin } from 'helpers/validation';
+import { setUserData } from 'helpers/storage';
 
 import { login } from 'actions/auth.actions';
 
@@ -41,7 +42,7 @@ export const Login: React.FC = memo(() => {
     formikHelpers.setSubmitting(true);
     try {
       const data = await login(values);
-      console.log(data);
+      setUserData('userData', data);
     } catch (err) {
       console.log('login error', err);
     }

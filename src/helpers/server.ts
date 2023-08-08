@@ -23,7 +23,34 @@ class ApiClient {
    * @param {string} token - Токен авторизации.
    */
   setAuthToken(token: string): void {
-    this.client.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    this.client.defaults.headers.common.Authorization = `Bearer ${token}`;
+  }
+
+  /**
+   * Обработчик ошибок.
+   *
+   * @param {AxiosError<unknown>} error - Объект ошибки.
+   * @throws {Error} - В случае ошибки при выполнении запроса.
+   */
+  private handleError(error: AxiosError | Error): void {
+    if (axios.isAxiosError(error)) {
+      if (error.response) {
+        // Обработка ошибки с ответом от сервера
+        console.error(
+          'Response Error:',
+          error.response.status,
+          error.response.data
+        );
+      } else if (error.request) {
+        // Обработка ошибки без ответа от сервера
+        console.error('Request Error:', error.request);
+      } else {
+        // Обработка других ошибок
+        console.error('Error:', error.message);
+      }
+    } else {
+      console.error('Unknown Error:', error);
+    }
   }
 
   /**
@@ -31,14 +58,16 @@ class ApiClient {
    *
    * @param {string} url - URL запроса.
    * @param {object} params - Параметры запроса.
-   * @returns {Promise} - Промис, который разрешается с данными ответа.
+   * @returns {Promise<T>} - Промис, который разрешается с данными ответа.
    */
   async get<T>(url: string, params?: object): Promise<T> {
     try {
       const response: AxiosResponse<T> = await this.client.get(url, { params });
       return response.data;
     } catch (error) {
-      throw error;
+      const err = error as AxiosError | Error;
+      this.handleError(err);
+      throw err;
     }
   }
 
@@ -49,12 +78,14 @@ class ApiClient {
    * @param {object} data - Данные запроса.
    * @returns {Promise} - Промис, который разрешается с данными ответа.
    */
-  async post<T>(url: string, data?: object): Promise<T> {
+  async post<T, D>(url: string, data?: D): Promise<T> {
     try {
       const response: AxiosResponse<T> = await this.client.post(url, data);
       return response.data;
     } catch (error) {
-      throw error;
+      const err = error as AxiosError | Error;
+      this.handleError(err);
+      throw err;
     }
   }
 
@@ -65,12 +96,14 @@ class ApiClient {
    * @param {object} data - Данные запроса.
    * @returns {Promise} - Промис, который разрешается с данными ответа.
    */
-  async put<T>(url: string, data?: object): Promise<T> {
+  async put<T, D>(url: string, data?: D): Promise<T> {
     try {
       const response: AxiosResponse<T> = await this.client.put(url, data);
       return response.data;
     } catch (error) {
-      throw error;
+      const err = error as AxiosError | Error;
+      this.handleError(err);
+      throw err;
     }
   }
 
@@ -85,7 +118,9 @@ class ApiClient {
       const response: AxiosResponse<T> = await this.client.delete(url);
       return response.data;
     } catch (error) {
-      throw error;
+      const err = error as AxiosError | Error;
+      this.handleError(err);
+      throw err;
     }
   }
 }

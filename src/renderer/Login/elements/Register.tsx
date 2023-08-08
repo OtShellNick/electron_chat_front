@@ -4,6 +4,7 @@ import { useFormik, FormikHelpers } from 'formik';
 import { Button } from 'components/Button';
 
 import { validationSchemaRegister } from 'helpers/validation';
+import { setUserData } from 'helpers/storage';
 
 import { register } from 'actions/auth.actions';
 
@@ -45,7 +46,7 @@ export const Register: React.FC = memo(() => {
     try {
       formikHelpers.setSubmitting(true);
       const registerData = await register(values);
-      console.log(registerData);
+      setUserData('userData', registerData);
     } catch (err) {
       console.log('register error', err);
     } finally {
