@@ -1,10 +1,12 @@
-import { memo } from 'react';
+import React, { memo } from 'react';
 import { useFormik, FormikHelpers } from 'formik';
+import { useDispatch } from 'react-redux';
 
 import { Button } from 'components/Button';
 
 import { validationSchemaLogin } from 'helpers/validation';
 import { setUserData } from 'helpers/storage';
+import { setUser } from 'store/user.store';
 
 import { login } from 'actions/auth.actions';
 
@@ -21,14 +23,7 @@ interface FormValues {
  * @returns Компонент Формы входа.
  */
 export const Login: React.FC = memo(() => {
-  const formik = useFormik<FormValues>({
-    initialValues: {
-      nick: '',
-      password: ''
-    },
-    validationSchema: validationSchemaLogin,
-    onSubmit: handleSubmit
-  });
+  const dispatch = useDispatch();
 
   /**
    * Обработчик отправки формы.
@@ -43,11 +38,21 @@ export const Login: React.FC = memo(() => {
     try {
       const data = await login(values);
       setUserData('userData', data);
+      dispatch(setUser({ user: data }));
     } catch (err) {
       console.log('login error', err);
     }
     formikHelpers.setSubmitting(false);
   }
+
+  const formik = useFormik<FormValues>({
+    initialValues: {
+      nick: '',
+      password: '',
+    },
+    validationSchema: validationSchemaLogin,
+    onSubmit: handleSubmit,
+  });
 
   return (
     <form className="form" onSubmit={formik.handleSubmit}>

@@ -13,7 +13,12 @@ export interface AuthDataLogin {
 }
 
 export interface AuthResponseData {
-  id: string;
+  id: number;
   login: string;
   email: string;
+}
+
+export interface IFriendData {
+  id: string;
+  login: string;
 }

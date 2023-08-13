@@ -2,7 +2,7 @@ import apiClient from 'helpers/server';
 import {
   AuthDataLogin,
   AuthDataRegister,
-  AuthResponseData
+  AuthResponseData,
 } from 'types/action.types';
 
 /**
@@ -15,12 +15,8 @@ import {
 export const login = async (
   authData: AuthDataLogin
 ): Promise<AuthResponseData> => {
-  try {
-    const { nick, password } = authData;
-    return await apiClient.post('/login', { login: nick, password });
-  } catch (error) {
-    throw error;
-  }
+  const { nick, password } = authData;
+  return apiClient.post('/login', { login: nick, password });
 };
 
 /**
@@ -33,10 +29,6 @@ export const login = async (
 export const register = async (
   authData: AuthDataRegister
 ): Promise<AuthResponseData> => {
-  try {
-    const { nick, email, password } = authData;
-    return await apiClient.post('/signup', { login: nick, email, password });
-  } catch (error) {
-    throw error;
-  }
+  const { nick, email, password } = authData;
+  return apiClient.post('/signup', { login: nick, email, password });
 };

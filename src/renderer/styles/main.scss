@@ -1,13 +1,13 @@
 @import 'fonts';
 @import 'colors';
 
-ul, li {
+ul,
+li {
   margin: 0;
   padding: 0;
 }
 
-
- body {
+body {
   font-family: 'Mulish', sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -40,4 +40,9 @@ a {
 a:hover {
   opacity: 1;
   text-decoration: none;
+}
+
+.chat__container {
+  display: grid;
+  grid-template-columns: auto 1fr;
 }

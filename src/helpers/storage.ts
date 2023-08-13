@@ -10,13 +10,25 @@ export const getUserData = () => {
 export const setUserData = (key: string, value: AuthResponseData) => {
   ElectronStorage.sendMessage('save:user-data', {
     key,
-    value
+    value,
   });
+};
+
+export const getAuthToken = () => {
+  ElectronStorage.sendMessage('get:token', { key: 'token' });
+};
+
+export const removeUserData = (key: string) => {
+  ElectronStorage.sendMessage('remove:user-data', { key });
 };
 
 export const setListeners = () => {
   ElectronStorage.on('get:user-data', (userData) => {
-    const user = JSON.parse(userData as string);
-    sendNotification('userData', user);
+    sendNotification('userData', userData);
+  });
+
+  ElectronStorage.on('get:token', (token) => {
+    const { token: tokenData } = token as { token: string };
+    sendNotification('token', tokenData);
   });
 };

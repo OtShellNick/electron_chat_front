@@ -1,0 +1,14 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &__item {
+    cursor: pointer;
+    padding: 0 0.5rem;
+  }
+
+  & .active {
+    background-color: var(--white-color-dark);
+  }
+}

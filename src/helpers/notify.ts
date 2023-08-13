@@ -1,5 +1,6 @@
-import { Subject, Observable, Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+import { INotificationData } from 'types/types.dict';
 
 interface Event {
   name: string;
@@ -40,7 +41,10 @@ export function createEventListener<T>(eventName: string): EventListener<T> {
   return eventListeners[eventName];
 }
 
-export function sendNotification(eventName: string, data: any): void {
+export function sendNotification(
+  eventName: string,
+  data: INotificationData
+): void {
   if (eventListeners[eventName]) {
     eventListeners[eventName].emit(data);
   }

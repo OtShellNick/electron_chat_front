@@ -13,7 +13,7 @@ class ApiClient {
    */
   constructor(baseURL: string) {
     this.client = axios.create({
-      baseURL
+      baseURL,
     });
   }
 
@@ -130,18 +130,3 @@ const apiClient = new ApiClient('http://185.20.225.15:3000');
 // apiClient.setAuthToken('your_auth_token');
 
 export default apiClient;
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
-
-async function getUsers() {
-  try {
-    const users: User[] = await apiClient.get<User[]>('/users', { page: 1 });
-    console.log(users);
-  } catch (error) {
-    console.error(error);
-  }
-}
